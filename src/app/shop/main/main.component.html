@@ -1,0 +1,20 @@
+<button routerLink="/shop/favorites">NAGIVATE</button>
+<div class="product-card-container">
+    <div *ngFor="let product of productList; let ind = index" class="product-card">
+        <div class="thumbnail">
+            <img src={{product.thumbnail}} alt="thumbnail">
+        </div>
+        <div class="details">
+            <div class="details-info">
+                <div class="card-title">
+                    <h2>{{product.title}}</h2>
+                    <i [ngClass]="{'far': !product.fav, 'fas': product.fav}" class="fa-heart" (click)="markUnmarkFav(product)"></i>
+                </div>
+                <p>{{product.description}}</p>
+            </div>
+            <div class="bottom">
+              <p>{{product.price}}</p>
+            </div>
+        </div>
+    </div>
+</div>
