@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/auth.reducer';
 import { shopReducer } from './shop/shop.reducer';
+import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { shopReducer } from './shop/shop.reducer';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    ShopModule,
     StoreModule.forRoot({
       auth: authReducer,
       shop: shopReducer

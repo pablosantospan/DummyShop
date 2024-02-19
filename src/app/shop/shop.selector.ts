@@ -8,3 +8,8 @@ export const selectShopProducts = createSelector(
     selectShopState,
   (state: ShopState) => state.productList
 );
+
+export const selectFavoriteProducts = createSelector(
+  selectShopState,
+  (state: ShopState) => state.favoriteProducts
+);

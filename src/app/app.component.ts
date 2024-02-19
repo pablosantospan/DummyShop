@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'dummy_shop';
+
+  isAuthenticated: boolean = false;
+
+  constructor(){
+    inject(AuthService).isToken().subscribe(res => {
+      this.isAuthenticated = res;
+    });
+  }
+
 }

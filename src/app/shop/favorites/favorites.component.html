@@ -7,12 +7,12 @@
             <div class="details-info">
                 <div class="card-title">
                     <h2>{{product.title}}</h2>
-                    <i [ngClass]="{'far': !product.fav, 'fas': product.fav}" class="fa-heart"></i>
+                    <i [ngClass]="{'far': !product.fav, 'fas': product.fav}" class="fa-heart" (click)="markUnmarkFav(product)"></i>
                 </div>
                 <p>{{product.description}}</p>
             </div>
             <div class="bottom">
-              <p>{{product.price}}</p>
+              <p>{{product.price}}€</p>
             </div>
         </div>
     </div>

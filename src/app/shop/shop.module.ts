@@ -4,13 +4,15 @@ import { MainComponent } from './main/main.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { RouterModule } from '@angular/router';
 import { ShopRoutingModule } from './shop-routing.module';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ProductListComponent
   ],
   imports: [
     CommonModule,

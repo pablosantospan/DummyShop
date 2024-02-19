@@ -11,12 +11,12 @@ const routes: Routes = [
         {
             path: 'main',
             component: MainComponent,
-            // canActivate: [authGuard]
+            canActivate: [authGuard]
         },
         {
             path: 'favorites',
             component: FavoritesComponent,
-            // canActivate: [authGuard]
+            canActivate: [authGuard]
         }
     ]
   }

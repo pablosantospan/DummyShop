@@ -2,30 +2,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/User.interface';
-import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Router, UrlTree } from '@angular/router';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { selectAuthToken } from '../auth.selector';
+import { resetToken } from '../auth.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isAuthenticated: Observable<string> = new Observable<string>();
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private token: string = '';
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store
+    private store: Store<{auth: { token: string }}>
     ) { }
 
   getToken(): string {
     return this.token;
   }
 
-  setToken(token: string){
+  setToken(token: string): void{
     this.token = token;
   }
 
@@ -43,8 +44,9 @@ export class AuthService {
     return this.http.post<User>(url, body, httpOptions);
   }
 
-  isAuthenticatedUser() {
+  isAuthenticatedUser(): Observable<boolean | UrlTree> {
     return this.store.pipe(
+      takeUntil(this.destroy$),
       select(selectAuthToken),
       map(token => {
         if (token !== null && token.trim() !== '') {
@@ -54,6 +56,30 @@ export class AuthService {
         }
       })
     );
+  }
+
+  isToken(): Observable<boolean>{
+    return this.store.pipe(
+      takeUntil(this.destroy$),
+      select(selectAuthToken),
+      map(token => {
+        return (token !== null && token.trim() !== '');
+      })
+    );
+  }
+
+  logout(): void{
+    this.store.dispatch(resetToken());
+    this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy(): void{
+    this.destroySubscriptions();
+  }
+
+  destroySubscriptions(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }
