@@ -44,7 +44,6 @@ export class LoginComponent {
       const password = this.loginForm.get('password')?.value;
       this.authService.login(user, password).subscribe((res) => {
         if(res && res.token){
-          console.log(res.token);
           this.setToken(res.token);
           this.router.navigate(['shop/main']);
         }

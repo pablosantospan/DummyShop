@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { ShopModule } from './shop/shop.module';
-import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';

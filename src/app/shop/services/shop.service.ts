@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { resetFavoriteProducts, setFavoriteProducts, setListOfProducts } from '../shop.actions';
+import { resetFavoriteProducts, resetProducts, setFavoriteProducts, setListOfProducts } from '../shop.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +67,5 @@ export class ShopService {
   }
 
   logout(){
-    this.store.dispatch(resetFavoriteProducts());
   }
 }

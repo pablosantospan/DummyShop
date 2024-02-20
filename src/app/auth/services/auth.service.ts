@@ -7,6 +7,7 @@ import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { selectAuthToken } from '../auth.selector';
 import { resetToken } from '../auth.actions';
+import { resetFavoriteProducts, resetProducts } from '../../shop/shop.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +70,11 @@ export class AuthService {
   }
 
   logout(): void{
+    this.store.dispatch(resetFavoriteProducts());
+    this.store.dispatch(resetProducts());
     this.store.dispatch(resetToken());
-    this.router.navigate(['/login']);
+    localStorage.removeItem("token");
+    this.router.navigate(['']);
   }
 
   ngOnDestroy(): void{

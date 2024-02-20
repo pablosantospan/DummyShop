@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { resetFavoriteProducts, setFavoriteProducts, setListOfProducts, toggleFavoriteProduct } from "./shop.actions";
+import { resetFavoriteProducts, resetProducts, setFavoriteProducts, setListOfProducts, toggleFavoriteProduct } from "./shop.actions";
 import { Product } from "../models/Product.inteface";
 
 export interface ShopState {
@@ -28,5 +28,9 @@ export const shopReducer = createReducer(
     on(resetFavoriteProducts, state => ({
       ...state,
       favoriteProducts: []
+    })),
+    on(resetProducts, state => ({
+      ...state,
+      productList: []
     }))
 )

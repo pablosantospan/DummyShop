@@ -8,3 +8,5 @@ export const setFavoriteProducts = createAction('Favorite products', props<{ fav
 export const toggleFavoriteProduct = createAction('Update favorite products', props<{ productId: number }>());
 
 export const resetFavoriteProducts = createAction('Reset favorite products');
+
+export const resetProducts = createAction('Reset favorite products');

@@ -60,7 +60,6 @@ describe('AuthService', () => {
     spyOn(store, 'pipe').and.returnValue(of('token'));
 
     service.isAuthenticatedUser().subscribe(result => {
-      console.log(result);
       expect(result).toBeDefined();
     });
   });
@@ -69,7 +68,6 @@ describe('AuthService', () => {
     spyOn(store, 'pipe').and.returnValue(of('token'));
 
     service.isToken().subscribe(result => {
-      console.log(result);
       expect(result).toBeDefined();
     });
   });
