@@ -64,8 +64,6 @@ export class AuthService {
   }
 
   logout(): void{
-    this.store.dispatch(resetFavoriteProducts());
-    this.store.dispatch(resetProducts());
     this.store.dispatch(resetToken());
     localStorage.removeItem("token");
     this.router.navigate(['']);

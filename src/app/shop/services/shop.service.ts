@@ -67,5 +67,7 @@ export class ShopService {
   }
 
   logout(){
+    this.store.dispatch(resetFavoriteProducts());
+    this.store.dispatch(resetProducts());
   }
 }

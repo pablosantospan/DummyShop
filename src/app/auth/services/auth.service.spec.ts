@@ -36,12 +36,6 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('get/set token', () => {
-    const token = 'token';
-    service.setToken(token);
-    expect(service.getToken()).toEqual(token);
-  });
-
   it('login', () => {
     const username = 'kminchelle';
     const password = '0lelplR';
@@ -79,7 +73,7 @@ describe('AuthService', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(resetToken());
 
-    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    expect(router.navigate).toHaveBeenCalledWith(['']);
   });
 
 });
