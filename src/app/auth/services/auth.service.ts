@@ -23,14 +23,6 @@ export class AuthService {
     private store: Store<{auth: { token: string }}>
     ) { }
 
-  getToken(): string {
-    return this.token;
-  }
-
-  setToken(token: string): void{
-    this.token = token;
-  }
-
   login(username: string, password: string): Observable<any> {
     const url = environment.loginUrl;
     const body = JSON.stringify({
@@ -45,6 +37,7 @@ export class AuthService {
     return this.http.post<User>(url, body, httpOptions);
   }
 
+  // Check if user is authenticated to log in
   isAuthenticatedUser(): Observable<boolean | UrlTree> {
     return this.store.pipe(
       takeUntil(this.destroy$),
@@ -59,6 +52,7 @@ export class AuthService {
     );
   }
 
+  //Check is a user token exists
   isToken(): Observable<boolean>{
     return this.store.pipe(
       takeUntil(this.destroy$),
