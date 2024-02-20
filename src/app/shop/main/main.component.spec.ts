@@ -6,7 +6,7 @@ import { Store, StoreModule } from '@ngrx/store';
 import { of } from 'rxjs';
 import { ShopService } from '../services/shop.service';
 
-fdescribe('MainComponent', () => {
+describe('MainComponent', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
   let store: jasmine.SpyObj<Store>;
