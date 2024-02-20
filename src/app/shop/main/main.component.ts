@@ -41,8 +41,9 @@ export class MainComponent implements OnInit {
     });
   }
 
+  // Get products successively while scrolling down the screen, due to list of products will grow considerably
   getProducts(){
-    this.subscription = this.shopService.getProducts()
+    this.shopService.getProducts()
     .subscribe((products) => {
       this.totalLength = products.length;
       this.productList = [...this.productList, ...products.slice(this.index, this.index + this.productsPerPage).map(prod => ({ ...prod, fav: false }))];;
@@ -52,6 +53,7 @@ export class MainComponent implements OnInit {
     });
   }
 
+  // Called when user scroll down the screen to get next products
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const windowHeight = window.innerHeight;

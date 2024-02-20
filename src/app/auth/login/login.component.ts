@@ -34,6 +34,7 @@ export class LoginComponent {
     return (control && control.touched && control.invalid);
   }
 
+  // Call login function from authService with user-filled form parameters
   login(): void{
     this.loginForm.markAllAsTouched();
     this.loginForm.updateValueAndValidity();
