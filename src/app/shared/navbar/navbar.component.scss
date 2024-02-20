@@ -1,36 +1,36 @@
 @mixin button-styles(){
-    margin-right: 10px;
-    padding: 10px;
-    border: none;
-    background-color: #ffffff;
-    color: #000000;
-    cursor: pointer;
-    border-radius: 5px;
-    flex: 1;
-    height: 100%;
-    width: 80px;
+  margin-right: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 5px;
+  flex: 1;
+  height: 100%;
+  width: 80px;
 }
 
 .header {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 60px;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ccc;
+
+  .left-buttons,
+  .right-buttons {
     display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    height: 60px;
-    margin-bottom: 30px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ccc;
-  
-    .left-buttons,
-    .right-buttons {
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-  
-    .home-button,
-    .favorites-button,
-    .logout-button {
-        @include button-styles();
-    }
+    align-items: center;
+    height: 100%;
+  }
+
+  .home-button,
+  .favorites-button,
+  .logout-button {
+      @include button-styles();
+  }
   }
   

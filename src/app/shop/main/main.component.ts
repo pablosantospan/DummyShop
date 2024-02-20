@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ShopService } from '../services/shop.service';
 import { Product } from '../../models/Product.inteface';
 import { Store, select } from '@ngrx/store';
-import { setListOfProducts } from '../shop.actions';
 import { selectShopProducts } from '../shop.selector';
-import { Subject, map, takeUntil } from 'rxjs';
+import { Subject, Subscription, map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +14,12 @@ export class MainComponent implements OnInit {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   productList: Product[] = [];
+  subscription: Subscription = new Subscription();
+
+  index: number= 0;
+  productsPerPage: number = 12;
+  isLoading: boolean = false;
+  totalLength: number = 0;
 
   constructor(
     private shopService: ShopService,
@@ -37,10 +42,27 @@ export class MainComponent implements OnInit {
   }
 
   getProducts(){
-    this.shopService.getProducts().subscribe((products) => {
-      this.productList = products.map(prod => ({ ...prod, fav: false }));
+    this.subscription = this.shopService.getProducts()
+    .subscribe((products) => {
+      this.totalLength = products.length;
+      this.productList = [...this.productList, ...products.slice(this.index, this.index + this.productsPerPage).map(prod => ({ ...prod, fav: false }))];;
+      this.index += this.productsPerPage;
       this.shopService.setProductList(this.productList);
+      this.isLoading = false;
     });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    const windowHeight = window.innerHeight;
+    const windowScroll = window.scrollY;
+    const documentHeight = document.body.offsetHeight;
+    const contentHeight = windowHeight + windowScroll;
+
+    if (!this.isLoading && this.index < this.totalLength && contentHeight >= documentHeight) {
+      this.isLoading = true;
+      this.getProducts();
+    }
   }
 
   markUnmarkFav(prod: Product){

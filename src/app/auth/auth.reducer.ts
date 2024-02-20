@@ -1,4 +1,4 @@
-import { createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from "@ngrx/store";
 import { loginSuccess, resetToken } from "./auth.actions";
 
 

@@ -20,18 +20,21 @@ export class LoginComponent {
     private router: Router,
     private store: Store<{auth: { token: string }}>
   ){
+    this.authService.isToken().subscribe(res => {
+      if(res) this.router.navigate(['shop/main'])
+    });
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  isInvalidField(fieldValue: string){
+  isInvalidField(fieldValue: string): boolean | null{
     const control = this.loginForm.get(fieldValue);
-    return control && control.touched && control.invalid;
+    return (control && control.touched && control.invalid);
   }
 
-  login(){
+  login(): void{
     this.loginForm.markAllAsTouched();
     this.loginForm.updateValueAndValidity();
 
@@ -48,7 +51,7 @@ export class LoginComponent {
     }
   }
 
-  setToken(token: string){
+  setToken(token: string): void{
     this.store.dispatch(loginSuccess({ token }));
   }
 
