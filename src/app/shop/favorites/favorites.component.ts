@@ -32,6 +32,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Get favorite products
   getFavoriteProducts(){
     this.subscription = this.store.pipe(
       takeUntil(this.destroy$),

@@ -23,6 +23,7 @@ export class ShopService {
     return this._list.asObservable();
   }
 
+  // get products from server
   getProducts(): Observable<Product[]>{
     const url = environment.productsUrl;
     return this.http.get<any>(url).pipe(
